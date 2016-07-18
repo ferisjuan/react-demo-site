@@ -3,7 +3,9 @@ var React = require('react');
 var Values = React.createClass({
   render(){
     return(
-      <span>{this.props.values}</span>
+      <h3><strong>{this.props.val}</strong></h3>
     );
   }
 });
+
+module.exports = Values;

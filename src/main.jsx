@@ -5,7 +5,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 // require the list function from /components/List.jsx
-var simplePanel = require('./components/simple-panel.jsx');
+var PanelManager = require('./components/PanelManager.jsx');
 
 // render the <List /> on the div with app id
-ReactDOM.render(<PanelMatrix />, document.getElementById('app'))
+ReactDOM.render(<PanelManager />, document.getElementById('app'))
