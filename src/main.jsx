@@ -4,8 +4,12 @@ var React = require('react');
 // Require react-dom
 var ReactDOM = require('react-dom');
 
-// require the list function from /components/List.jsx
-var PanelManager = require('./components/PanelManager.jsx');
+// require the components from /components/*.jsx
+var InfoTop = require('./components/InfoTop.jsx');
+var InfoBottom = require('./components/InfoBottom.jsx');
+var InfoSide = require('./components/InfoSide.jsx');
 
-// render the <List /> on the div with app id
-ReactDOM.render(<PanelManager />, document.getElementById('app'))
+// render the top row panels
+ReactDOM.render(<InfoTop />, document.getElementById('info-top'));
+ReactDOM.render(<InfoBottom />, document.getElementById('info-bottom'));
+ReactDOM.render(<InfoSide />, document.getElementById('info-side'));

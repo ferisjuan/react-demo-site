@@ -20153,89 +20153,260 @@ module.exports = require('./lib/React');
 
 },{"./lib/React":54}],171:[function(require,module,exports){
 var React = require('react');
-var SimplePanelRow = require('./SimplePanelRow.jsx');
 
-var PanelManager = React.createClass({
-  displayName: 'PanelManager',
+var Description = React.createClass({
+  displayName: 'Description',
+
+  render() {
+    return React.createElement(
+      'small',
+      { style: this.props.styles },
+      this.props.description
+    );
+  }
+});
+
+module.exports = Description;
+
+},{"react":170}],172:[function(require,module,exports){
+var React = require('react');
+var PanelComplex = require('./PanelComplex.jsx');
+
+var InfoBottom = React.createClass({
+  displayName: 'InfoBottom',
+
+  render() {
+
+    var info = [{ shotViews: 15080 }, { likes: 12000 }, { comments: 5000 }];
+
+    var styles = {
+      values: {},
+      description: {}
+    };
+
+    var panelBodyStyles01 = {
+      background: '#007FFF',
+      height: 200
+    };
+    var panelBodyStyles02 = {
+      background: '#FF6600',
+      height: 200
+    };
+    var panelFooterStyles = {
+      background: '#364040',
+      height: 100
+    };
+
+    return React.createElement(
+      'div',
+      { className: '' },
+      React.createElement(PanelComplex, { info: info,
+        panelBodyStyles: panelBodyStyles01,
+        panelFooterStyles: panelFooterStyles }),
+      React.createElement(PanelComplex, { info: info,
+        panelBodyStyles: panelBodyStyles02,
+        panelFooterStyles: panelFooterStyles })
+    );
+  }
+});
+
+module.exports = InfoBottom;
+
+},{"./PanelComplex.jsx":175,"react":170}],173:[function(require,module,exports){
+var React = require('react');
+var PanelSimple = require('./PanelSimple.jsx');
+var PanelSide = require('./PanelSide.jsx');
+
+var InfoSide = React.createClass({
+  displayName: 'InfoSide',
+
+  render() {
+    var style01 = {
+      background: '#FF6600',
+      borderRadius: 5,
+      color: 'white',
+      height: 150,
+      marginTop: 0,
+      marginBottom: 20,
+      paddingTop: 25,
+      textAlign: 'center',
+      verticalAlign: 'middle'
+    };
+    var styles = [{
+      background: '#007FFF',
+      color: 'white',
+      height: 60,
+      padding: 0,
+      paddingBottom: 10
+    }, {
+      background: '#6114CC',
+      color: 'white',
+      height: 60,
+      padding: 0,
+      paddingBottom: 10
+    }, {
+      background: '#AB00B2',
+      color: 'white',
+      height: 60,
+      padding: 0,
+      paddingBottom: 10
+    }, {
+      background: '#47B200',
+      color: 'white',
+      height: 60,
+      padding: 0,
+      paddingBottom: 10
+    }];
+
+    return React.createElement(
+      'div',
+      { className: 'row' },
+      React.createElement(PanelSimple, { classes: 'side', styles: style01, val: '18°', description: 'Paris' }),
+      React.createElement(PanelSide, { styles: styles[0], description: 'New visitors', val: '1.5k' }),
+      React.createElement(PanelSide, { styles: styles[1], description: 'Bounce Rate', val: '50%' }),
+      React.createElement(PanelSide, { styles: styles[2], description: 'Searchs', val: '28%' }),
+      React.createElement(PanelSide, { styles: styles[3], description: 'Trafic', val: '140.5kb' })
+    );
+  }
+});
+
+module.exports = InfoSide;
+
+},{"./PanelSide.jsx":176,"./PanelSimple.jsx":177,"react":170}],174:[function(require,module,exports){
+var React = require('react');
+var PanelSimple = require('./PanelSimple.jsx');
+
+var InfoTop = React.createClass({
+  displayName: 'InfoTop',
 
   render() {
     var info = [{ val: "20", description: "New followers added this month" }, { val: '$ 1250', description: "Average Montly Income" }, { val: "$ 13865", description: "Yearly Income Goal" }];
 
-    return React.createElement(
-      'div',
-      { id: 'row' },
-      React.createElement(
-        'div',
-        { className: 'col-sm-8' },
-        React.createElement(SimplePanelRow, { info: info })
-      ),
-      React.createElement('div', { className: 'col-sm-4' })
-    );
-  }
-});
-
-module.exports = PanelManager;
-
-},{"./SimplePanelRow.jsx":173,"react":170}],172:[function(require,module,exports){
-var React = require('react');
-var Values = require('./Values.jsx');
-var Description = require('./description.jsx');
-
-var SimplePanel = React.createClass({
-  displayName: 'SimplePanel',
-
-
-  render() {
-    var panelStyle = {};
-
-    if (this.props.background) {
-      divStyle.background = this.props.background;
-    }
-    return React.createElement(
-      'div',
-      { className: this.props.classes },
-      React.createElement(Values, { val: this.props.val }),
-      React.createElement(Description, { description: this.props.description })
-    );
-  }
-});
-
-module.exports = SimplePanel;
-
-},{"./Values.jsx":174,"./description.jsx":175,"react":170}],173:[function(require,module,exports){
-var React = require('react');
-var SimplePanel = require('./SimplePanel.jsx');
-
-var SimplePanelRow = React.createClass({
-  displayName: 'SimplePanelRow',
-
-  render() {
-
     var panelStyles = {
-      marginRigth: "20",
-      height: "200",
-      paddingLeft: "30"
+      color: "#737F7F",
+      borderRadius: 5,
+      height: 150,
+      width: '30%',
+      marginRight: '3.33%'
     };
 
+    var classes = 'col-sm-4 panel panel-default';
+
     var createItem = function (el, index) {
-      return React.createElement(SimplePanel, {
+      return React.createElement(PanelSimple, {
         key: index + el,
-        classes: 'col-sm-3 col-sm-offset-1 panel panel-default',
+        classes: classes,
         val: el.val,
-        description: el.description
+        description: el.description,
+        styles: panelStyles
       });
     };
     return React.createElement(
       'div',
-      { 'class': 'row', style: panelStyles },
-      this.props.info.map(createItem)
+      null,
+      info.map(createItem)
     );
   }
 });
 
-module.exports = SimplePanelRow;
+module.exports = InfoTop;
 
-},{"./SimplePanel.jsx":172,"react":170}],174:[function(require,module,exports){
+},{"./PanelSimple.jsx":177,"react":170}],175:[function(require,module,exports){
+var React = require('react');
+var Values = require('./Values.jsx');
+var Description = require('./Description.jsx');
+var PanelSimple = require('./PanelSimple.jsx');
+
+var PanelComplex = React.createClass({
+  displayName: 'PanelComplex',
+
+  render() {
+    var panelStyles = {
+      color: 'white'
+    };
+
+    var createItem = function (el, index) {
+      var keys = Object.keys(el);
+      return React.createElement(
+        'div',
+        { className: 'col-sm-4 info-bottom' },
+        React.createElement(PanelSimple, {
+          key: index + el,
+          val: el[keys[0]],
+          description: keys[0],
+          styles: panelStyles,
+          classes: 'text-center'
+        })
+      );
+    };
+
+    return React.createElement(
+      'div',
+      { className: 'panel panel-deafult' },
+      React.createElement('div', { className: 'panel-body', style: this.props.panelBodyStyles }),
+      React.createElement(
+        'div',
+        { className: 'panel-footer', style: this.props.panelFooterStyles },
+        React.createElement(
+          'div',
+          { className: 'row' },
+          this.props.info.map(createItem)
+        )
+      )
+    );
+  }
+});
+
+module.exports = PanelComplex;
+
+},{"./Description.jsx":171,"./PanelSimple.jsx":177,"./Values.jsx":178,"react":170}],176:[function(require,module,exports){
+var React = require('react');
+var Description = require('./Description.jsx');
+var Values = require('./Values.jsx');
+
+var PanelSide = React.createClass({
+  displayName: 'PanelSide',
+
+  render() {
+    return React.createElement(
+      'div',
+      { className: 'panel panel-default' },
+      React.createElement(
+        'div',
+        { className: 'panel-heading', style: this.props.styles },
+        React.createElement(Description, { description: this.props.description }),
+        React.createElement(Values, { styles: { margin: 0 }, val: this.props.val })
+      ),
+      React.createElement('div', { className: 'panel-body', style: { height: 60 } })
+    );
+  }
+});
+
+module.exports = PanelSide;
+
+},{"./Description.jsx":171,"./Values.jsx":178,"react":170}],177:[function(require,module,exports){
+var React = require('react');
+var Values = require('./Values.jsx');
+var Description = require('./Description.jsx');
+
+var PanelSimple = React.createClass({
+  displayName: 'PanelSimple',
+
+
+  render() {
+
+    return React.createElement(
+      'div',
+      { className: this.props.classes, style: this.props.styles },
+      React.createElement(Values, { val: this.props.val }),
+      React.createElement(Description, { style: this.props.style, description: this.props.description })
+    );
+  }
+});
+
+module.exports = PanelSimple;
+
+},{"./Description.jsx":171,"./Values.jsx":178,"react":170}],178:[function(require,module,exports){
 var React = require('react');
 
 var Values = React.createClass({
@@ -20244,7 +20415,7 @@ var Values = React.createClass({
   render() {
     return React.createElement(
       'h3',
-      null,
+      { style: this.props.styles },
       React.createElement(
         'strong',
         null,
@@ -20256,34 +20427,21 @@ var Values = React.createClass({
 
 module.exports = Values;
 
-},{"react":170}],175:[function(require,module,exports){
-var React = require('react');
-
-var Description = React.createClass({
-  displayName: 'Description',
-
-  render() {
-    return React.createElement(
-      'small',
-      null,
-      this.props.description
-    );
-  }
-});
-
-module.exports = Description;
-
-},{"react":170}],176:[function(require,module,exports){
+},{"react":170}],179:[function(require,module,exports){
 // Require react
 var React = require('react');
 
 // Require react-dom
 var ReactDOM = require('react-dom');
 
-// require the list function from /components/List.jsx
-var PanelManager = require('./components/PanelManager.jsx');
+// require the components from /components/*.jsx
+var InfoTop = require('./components/InfoTop.jsx');
+var InfoBottom = require('./components/InfoBottom.jsx');
+var InfoSide = require('./components/InfoSide.jsx');
 
-// render the <List /> on the div with app id
-ReactDOM.render(React.createElement(PanelManager, null), document.getElementById('app'));
+// render the top row panels
+ReactDOM.render(React.createElement(InfoTop, null), document.getElementById('info-top'));
+ReactDOM.render(React.createElement(InfoBottom, null), document.getElementById('info-bottom'));
+ReactDOM.render(React.createElement(InfoSide, null), document.getElementById('info-side'));
 
-},{"./components/PanelManager.jsx":171,"react":170,"react-dom":28}]},{},[176]);
+},{"./components/InfoBottom.jsx":172,"./components/InfoSide.jsx":173,"./components/InfoTop.jsx":174,"react":170,"react-dom":28}]},{},[179]);
